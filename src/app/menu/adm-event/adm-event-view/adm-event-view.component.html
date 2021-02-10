@@ -1,0 +1,137 @@
+<div class="row">
+<div class="col-lg-6">
+  <div class="infinite-cards">
+    <nb-card class="own-scroll"
+             class="own-scroll" accent="info"  [nbSpinner]="loading"
+             nbSpinnerStatus="info"
+             nbSpinnerSize="large"
+             nbSpinnerMessage="Loading!" size="small">
+
+      <nb-card-header>
+        <h6 style="text-align: center" > NEW EVENTS</h6>
+
+      </nb-card-header>
+<nb-card-header>
+
+  <label class="search-label" for="search">Search : </label>
+  <input nbInput [nbFilterInput]="events"  class="search-input">
+      </nb-card-header>
+      <nb-list nbInfiniteList [threshold]="500">
+        <nb-list-item  *ngFor="let event of newevents" >
+          <nb-accordion>
+            <nb-accordion-item #item>
+              <nb-accordion-item-header>
+                <nb-user [name]="event.eName" shape="rectangle"[title]="event.eDate">
+                </nb-user>
+                <label *ngIf="event.eStatus == 'Published'" style="color: #d6d6d6; opacity: 0.6;">{{event.eStatus}} by: {{event.eCname}}</label>
+                <label *ngIf="event.eStatus == 'Completed'" style="color:green;opacity: 0.6;">{{event.eStatus}} by: {{event.eCname}}</label>
+                <label *ngIf="event.eStatus == 'In-Progress'" style="color:aqua;opacity: 0.6;">{{event.eStatus}} by: {{event.eCname}}</label>
+                <label *ngIf="event.eStatus == 'Canceled'" style="color:red;opacity: 0.6;">{{event.eStatus}} by: {{event.eCname}}</label>
+                <div class="mag">
+                  <nb-action size="tiny">
+<!--                    <nb-action *ngIf="event.eStatus == 'Draft'" class="edit" (click)="Publish(event.id,event)" icon="arrow-circle-up-outline"></nb-action>-->
+                    <nb-action nbTooltip="View Services" nbTooltipIcon="eye-outline" nbTooltipStatus="control" class="edit" (click)="openViewForm(event.id)" icon="eye-outline"></nb-action>
+                    <nb-action nbTooltip="Assign a planner" nbTooltipIcon="plus-square-outline" nbTooltipStatus="info"  (click)="openAssignForm(event.id,event)" icon="plus-square-outline"></nb-action>
+                    <nb-action nbTooltip="Delete" nbTooltipIcon="trash-2-outline" nbTooltipStatus="danger" class="edit" (click)="onDelete(event.id)" icon="trash-2-outline"></nb-action>
+
+                  </nb-action>
+                </div>
+              </nb-accordion-item-header>
+              <nb-accordion-item-body>
+                Description : {{event.eDesc}} <br>
+                Venue:{{event.ePlace}}<br>
+                Venue:{{event.eDate}}<br>
+                Other   : {{event.eAny}}
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+          </nb-accordion>
+        </nb-list-item>
+
+      </nb-list>
+    </nb-card>
+  </div>
+</div>
+  <div class="col-md-12 col-lg-6 col-xxxl-6">
+  <div class="infinite-cards" size="small">
+    <nb-card class="own-scroll"
+             class="own-scroll" accent="warning"  [nbSpinner]="loading"
+             nbSpinnerStatus="warning"
+             nbSpinnerSize="large"
+             nbSpinnerMessage="Loading!">
+
+      <nb-card-header>
+        <h6 style="text-align: center" >EVENT PLANNERS</h6>
+
+      </nb-card-header>
+      <nb-card-header>
+
+        <label class="search-label" for="search">Search : </label>
+        <input nbInput [nbFilterInput]="events"  class="search-input">
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let desginer of employees">
+          <nb-user [name]="desginer.ename" [title]="desginer.eemail" size="large" badgeText=" " badgeStatus="success"  badgePosition="bottom right">
+          </nb-user>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+</div>
+</div>
+<div class="row">
+<div class="col-lg-12">
+  <div class="infinite-cards">
+    <nb-card class="own-scroll"
+             class="own-scroll" accent="danger"  [nbSpinner]="loading"
+             nbSpinnerStatus="danger"
+             nbSpinnerSize="large"
+             nbSpinnerMessage="Loading!">
+
+      <nb-card-header>
+        <h6 style="text-align: center" >ALL EVENTS</h6>
+
+      </nb-card-header>
+      <nb-card-header>
+
+        <label class="search-label" for="search">Search : </label>
+        <input nbInput [nbFilterInput]="events" id="search" class="search-input">
+        <button class="btn" nbTooltip="Generate Report"  nbTooltipStatus="control" status="control" size="small"  nbButton  ><nb-icon [options]="{ animation: { type:'zoom'} }"  icon="file-outline"></nb-icon>Report</button>
+
+
+      </nb-card-header>
+      <nb-list nbInfiniteList [threshold]="500">
+        <nb-list-item  *ngFor="let event of events" >
+          <nb-accordion>
+            <nb-accordion-item #item>
+              <nb-accordion-item-header>
+                <nb-user [name]="event.eName" shape="rectangle"[title]="event.eDate">
+                </nb-user>
+                <label *ngIf="event.eStatus == 'Published'" style="color: #d6d6d6; opacity: 0.6;">{{event.eStatus}}  </label>
+                <label *ngIf="event.eStatus == 'Completed'" style="color:green;opacity: 0.6;">{{event.eStatus}}   </label>
+                <label *ngIf="event.eStatus == 'In Progress'" style="color:aqua;opacity: 0.6;">{{event.eStatus}}   </label>
+                <label *ngIf="event.eStatus == 'Canceled'" style="color:red;opacity: 0.6;">{{event.eStatus}}    </label>
+                <div class="mag">
+                  <nb-action size="tiny" >
+                    <nb-action   [disabled]="(event.sStatus != 'Completed')" nbTooltip="View Feedbacks" nbTooltipIcon="heart-outline" nbTooltipStatus="control"  (click)="ViewFeedbacks(event.id)"  icon="heart"></nb-action>
+                    <nb-action   [disabled]="(event.sStatus != 'In Progress')" nbTooltip="Mark Completed" nbTooltipIcon="done-all" nbTooltipStatus="success"  (click)="makeComplete(event.id,event)"  icon="done-all"></nb-action>
+                    <nb-action  nbTooltip="Delete" nbTooltipIcon="trash-2-outline" nbTooltipStatus="danger" class="edit" (click)="onDelete(event.id)" icon="trash-2-outline"></nb-action>
+
+                  </nb-action>
+                </div>
+              </nb-accordion-item-header>
+              <nb-accordion-item-body>
+                Customer: {{event.eCname}} <br>
+                Description : {{event.eDesc}} <br>
+                Venue:{{event.ePlace}}<br>
+                Venue:{{event.eDate}}<br>
+                Other   : {{event.eAny}}
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+          </nb-accordion>
+        </nb-list-item>
+
+      </nb-list>
+    </nb-card>
+  </div>
+</div>
+</div>

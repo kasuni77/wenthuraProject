@@ -1,0 +1,81 @@
+<div class="row">
+<div class="col-lg-6">
+  <nb-card class ="post-form" accent="info"  [nbSpinner]="loading"
+           nbSpinnerStatus="info"
+           nbSpinnerSize="large"
+           nbSpinnerMessage="Loading!">
+    <nb-card-header><h6>POST NEW VACANCY</h6></nb-card-header>
+
+    <nb-card-body class="form-body">
+
+      <input type="text" name ="vname" nbInput fullWidth placeholder="Vacancy Name" [(ngModel)]="vacancy.vname">
+      <textarea rows="5" name ="textarea" nbInput fullWidth  placeholder="Description" [(ngModel)]="vacancy.vdesc"></textarea>
+      <nb-select fullWidth selected="Full Time"  name ="worktime" [(ngModel)]="vacancy.worktime" >
+        <nb-option value="Full Time">Full Time</nb-option>
+        <nb-option value="Part Time">Part Time</nb-option>
+        </nb-select>
+      <input type="text" name ="place" nbInput fullWidth  placeholder="Work Place"   [(ngModel)]="vacancy.vplace">
+
+      <input  nbInput fullWidth [nbDatepicker]="rangepicker" name="duration" [(ngModel)]="picker">
+      <nb-rangepicker  #rangepicker  ></nb-rangepicker>
+      <button  nbButton fullWidth  (click)="onSubmit()" type="submit" status="info">Post
+      </button>
+
+    </nb-card-body>
+
+  </nb-card>
+</div>
+
+  <div class="col-lg-6">
+<div class="infinite-cards">
+    <nb-card class="own-scroll" accent="success"  [nbSpinner]="loading"
+             nbSpinnerStatus="success"
+             nbSpinnerSize="large"
+             nbSpinnerMessage="Loading!">
+
+      <nb-card-header><h6>VACANCIES</h6></nb-card-header>
+      <nb-card-body class ="list-body" size="medium">
+      <nb-list nbInfiniteList [threshold]="500">
+
+        <nb-list-item *ngFor="let vacancy of vacancies">
+          <nb-accordion>
+            <nb-accordion-item #item>
+              <nb-accordion-item-header>
+                <nb-user [name]="vacancy.vname" color="black" shape="rectangle" [title]="vacancy.edate"> <!--[name]="user.name" [title]="user.title">-->
+                </nb-user>
+                <div class="mag">
+                  <nb-action size="tiny">
+                    <nb-action (click)="openWindowForm(vacancy)" nbButton class="edit" icon="edit-outline"></nb-action>
+                    <nb-action (click)="deleteConfirm(vacancy.id)" class="edit"  icon="trash-2-outline"></nb-action>
+                  </nb-action>
+                </div>
+              </nb-accordion-item-header>
+              <nb-accordion-item-body>
+                <div class="article-content fixed">
+                   <p>{{vacancy.vdesc}}</p>
+                </div>
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+          </nb-accordion>
+        </nb-list-item>
+      </nb-list>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+</div>
+
+<ng-template #Updateform>
+<form class="form">
+  <input type="text" nbInput fullWidth placeholder="Vacancy Name" name="Vname" [(ngModel)]="vacancy.vname">
+  <textarea rows="3" nbInput fullWidth  placeholder="Description" name="Vdesc" [(ngModel)]="vacancy.vdesc"></textarea>
+  <nb-select fullWidth selected="1" name="Vwork" [(ngModel)]="vacancy.worktime">
+    <nb-option value="1">Full Time</nb-option>
+    <nb-option value="2">Part Time</nb-option>
+  </nb-select>
+  <input type="text" nbInput fullWidth placeholder="Work Place" name="Vplace" [(ngModel)]="vacancy.vplace">
+  <input nbInput fullWidth placeholder="Duration" [nbDatepicker]="rangepicker" name="Vdate" [(ngModel)]="picker">
+  <nb-rangepicker #rangepicker></nb-rangepicker>
+  <button  nbButton fullWidth status="success" (click)="onClick()">Post</button>
+</form>
+</ng-template>

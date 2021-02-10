@@ -1,0 +1,44 @@
+nb-action {
+  padding: 0 1.25rem;
+  height: auto;
+  display: flex;
+}
+
+.mag{
+  position: absolute;
+  right:0;
+}
+nb-card {
+  &.list-card {
+    height: 67vh;
+  }
+}
+nb-install-component()
+{
+button[nbTreeGridRowToggle] {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.search-label {
+  display: block;
+
+
+}
+
+.search-input {
+  margin-bottom: 1rem;
+}
+
+}
+label {
+  &.search-label{
+    margin-left: 10px;
+  }
+}
+.edit {
+    float: right;
+    margin-right: 10px;
+    justify-content: right;
+  }
+

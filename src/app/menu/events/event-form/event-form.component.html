@@ -1,0 +1,92 @@
+<div class="steppers-container row">
+  <div class="col">
+    <nb-card  size="giant" >
+      <nb-card-body>
+        <nb-stepper #stepper>
+          <nb-step label="First step">
+              <p class="lorem">
+                Welcome to Wenthura Event Planning System!<br>
+                Please fill this section to continue the process of creating profile!
+              </p>
+            <div class="input-group">
+              <input nbInput fullWidth type="text" placeholder="Your name" class="form-control" [(ngModel)] = "event.eCname">
+            </div>
+            <div class="input-group">
+              <input nbInput fullWidth type="text" placeholder="Enter your event name" class="form-control" [(ngModel)] = "event.eName">
+            </div>
+              <div class="input-group">
+                <textarea nbInput fullWidth rows="10" placeholder="Describe your about here" class="form-control" [(ngModel)] = "event.eDesc"></textarea>
+              </div>
+            <div class="input-group">
+              <input nbInput fullWidth placeholder="Date" [nbDatepicker]="datepicker" [(ngModel)] = "event.eDate">
+              <nb-datepicker #datepicker></nb-datepicker>
+            </div>
+
+              <div class="input-group">
+                <input nbInput fullWidth type="text" placeholder="Venue" class="form-control" [(ngModel)] = "event.ePlace"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+            <button size="giant" nbButton nbStepperNext>next</button>
+          </nb-step>
+          <nb-step label="Second step">
+              <p class="lorem">
+                Please select your needed Services! <p>
+
+              <nb-list class="own-scroll"
+                nbInfiniteList
+                [threshold]="500">
+                <nb-list-item *ngFor="let book of books" >
+                  <nb-accordion>
+                    <nb-accordion-item #item>
+                      <nb-accordion-item-header>
+                        <nb-checkbox (checkedChange)="toggle($event,book)" value="{{book.checked}}" status="basic"></nb-checkbox>
+                        <nb-user class="check"  [picture]="book.retrievedImage" [name]="book.name" shape="rectangle"  >
+                        </nb-user>
+
+                      </nb-accordion-item-header>
+                      <nb-accordion-item-body>
+                        {{book.author}}
+                      </nb-accordion-item-body>
+                    </nb-accordion-item>
+                  </nb-accordion>
+                </nb-list-item>
+              </nb-list>
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext (click)="addService()">next</button>
+          </nb-step>
+          <nb-step label="Third step">
+              <p class="lorem">
+                 Congratulations. It's Final Step!
+              </p>
+
+              <div class="input-group">
+                <textarea nbInput fullWidth rows="10" placeholder="Type Anything here" class="form-control" [(ngModel)] = "event.eAny"></textarea>
+              </div>
+
+              <div class="input-group">
+                <label  class="label">Would you like to subscribe to our Customer experience blog?</label>
+                <div class="col-sm-2">
+                  <nb-radio-group  name="fname" [(ngModel)] = "event.eMeet">
+                    <nb-radio value=true>Yes</nb-radio>
+                    <nb-radio value=false>No</nb-radio>
+                  </nb-radio-group>
+                </div>
+              </div>
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext>Confirm</button>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+            <div class="step-container">
+              <h3>Event Profile Succesully Created!</h3>
+              <button *ngIf="event.id == null" nbButton (click)="OnPublish()">Publish</button>
+              <button *ngIf="event.id == null"nbButton (click)="Ondraft()">Save Draft</button>
+              <button *ngIf="event.id == null"nbButton (click)="stepper.reset()">Try again</button>
+              <button *ngIf="event.id != null && event.eStatus =='Published'"nbButton (click)="Update(event.id,event)">Try again</button>
+              <button *ngIf="event.id != null && event.eStatus =='Draft'"nbButton (click)="UpdateDraft(event.id,event)">Try again</button>
+            </div>
+          </nb-step>
+        </nb-stepper>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

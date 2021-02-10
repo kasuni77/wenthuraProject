@@ -1,0 +1,30 @@
+:host ::ng-deep nb-stepper .step-content {
+  text-align: center;
+
+
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}
+
+nb-accordion{
+  width: 100%;
+}
+
+
+.check{
+  margin-left: 10px;
+}
+
+.own-scroll {
+      height: 70vh;
+}
+
+.lorem{
+  text-align: center;
+}
+
+.input-group{
+  padding: 12px;
+}

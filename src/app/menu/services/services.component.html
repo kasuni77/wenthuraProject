@@ -1,0 +1,100 @@
+
+<div class="col">
+  <nb-card  accent="success"  size="giant" >
+ <nb-card-header><h6 class="head">SERVICES</h6> </nb-card-header>
+    <nb-card-body class="nbody">
+
+      <div class=" row" >
+
+        <div class="col-lg-3 col-md-3 col-sm-4" *ngFor="let book of books"  >
+          <nb-flip-card accent="info"  [nbSpinner]="loading"
+                        nbSpinnerStatus="info"
+                        nbSpinnerSize="large"
+                        nbSpinnerMessage="Loading" >
+            <nb-card-front >
+              <nb-card class="lol"  status="success" >
+                <nb-card-header>
+                  <i class="ion-social-usd"></i>
+                  <span class="title"><h6 class="name">{{book.name}}</h6></span>
+                </nb-card-header>
+                  <nb-card-body class="body">
+                    <img class="picture" src="{{book.retrievedImage}}"  >
+                  </nb-card-body>
+                <nb-card-footer >
+
+                  <div *ngIf="book.addrm" class="btset">
+                    <nb-action  class="control-item" (click)="addCart(book)" icon="plus-circle-outline" ></nb-action>
+                  </div>
+                  <div *ngIf="!book.addrm" class="btset">
+                    <nb-action class="control-item" (click)="removeCart(book)" icon="trash-outline" ></nb-action>
+                  </div>
+
+                </nb-card-footer>
+              </nb-card>
+            </nb-card-front>
+            <nb-card-back>
+              <nb-card size="small" status="info">
+                <nb-card-header>
+                  <span class="title">Description</span>
+                </nb-card-header>
+                <nb-card-body>
+                  <div class="article-content fixed">
+                    <p>{{book.author}}</p>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </nb-card-back>
+          </nb-flip-card>
+        </div>
+      </div>
+
+    </nb-card-body>
+  </nb-card>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--</div>-->
+<!--<div class="container row">-->
+<!--  <div class="col-md-4" *ngFor="let book of books;let i=index">-->
+<!--    <div class="card card-block">-->
+<!--      <img class="custom-image-style" img src="{{book.retrievedImage}}" height="300" width="200" style="margin-left: 60px;-->
+<!--          margin-top: 10px">-->
+<!--      <div class="book-desc-container row">-->
+<!--        <div>-->
+<!--          <p style="margin-left: 60px"><strong>{{book.name}}: ${{book.price}}</strong></p>-->
+<!--          <p style="margin-left: 60px">{{book.author}}</p>-->
+<!--        </div>-->
+<!--        <div class="offset-md-4 col-md-4">-->
+<!--          <button class="btn btn-primary btn-sm" (click)="addToCart(book.id)"-->
+<!--                  [disabled]="book.isAdded===true">Add To Cart</button>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
