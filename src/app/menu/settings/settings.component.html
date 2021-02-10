@@ -1,0 +1,45 @@
+<div class="col-md-4 col-xxxl-4">
+  <nb-card size="large" *ngFor="let vacancy of vacancies">
+    <nb-card-header>
+      {{vacancy.vname}}
+    </nb-card-header>
+    <nb-card-body>
+      <span>Description : {{vacancy.vdesc}}</span><br><br>
+      <span *ngIf="vacancy.worktime == 'Part Time'">Job Time : Part Time</span>
+      <span *ngIf="vacancy.worktime == 'Full Time'">Job Time : Full Time</span><br><br>
+      <span>Place : {{vacancy.vplace}}</span><br><br>
+      <h6>Duration : {{vacancy.sdate}} - {{vacancy.edate}}  </h6><br>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton status="danger" fullWidth (click)="open()">Apply</button>
+      <nz-drawer [nzWidth]="720" [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzTitle="Application Drawer" (nzOnClose)="close()">
+        <nb-card>
+          <nb-card-header>Application Form</nb-card-header>
+          <nb-card-body>
+            <span>Your Details</span>
+            <input type="text" nbInput fullWidth placeholder="Full Name">
+            <div class="full-name-inputs">
+              <input type="text" nbInput fullWidth placeholder="Middle Name">
+              <input type="text" nbInput fullWidth placeholder="Last Name">
+            </div>
+            <input type="text" nbInput fullWidth placeholder="Vacancy Name">
+            <input type="text" nbInput fullWidth placeholder="Birth of Date">
+            <input type="text" nbInput fullWidth placeholder="Phone Number">
+            <textarea rows="3" nbInput fullWidth   placeholder="Address"></textarea>
+            <input type="text" nbInput fullWidth placeholder="Email Address">
+            <input type="text" nbInput fullWidth placeholder="Age">
+            <span>Enter Your Skills and Qualifications: Licenses, Skills, Training, Awards</span>
+            <textarea rows="3" nbInput fullWidth   placeholder="Certificates"></textarea>
+            <textarea rows="3" nbInput fullWidth   placeholder="Skill"></textarea>
+            <textarea rows="3" nbInput fullWidth   placeholder="Training Experiences"></textarea>
+            <textarea rows="3" nbInput fullWidth   placeholder="Degree And Awards"></textarea>
+
+            <button nbButton status="danger" fullWidth (click)="close()">Apply</button>
+
+          </nb-card-body>
+        </nb-card>
+
+      </nz-drawer>
+    </nb-card-footer>
+  </nb-card>
+</div>

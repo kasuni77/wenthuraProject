@@ -1,0 +1,25 @@
+<nb-card>
+
+  <carousel>
+   <div *ngFor="let slide of imageArray">
+    <slide>
+      <img [src]= slide.url  style="display: block; width: 100%;">
+      <div class="carousel-caption p-2  d-none d-xl-block">
+        <a [routerLink]="slide.shot"> <button nbButton  size="small" status="primary" type="button" class="home-button">  Read More </button></a>
+      </div>
+    </slide>
+   </div>
+  </carousel>
+
+</nb-card>
+
+
+<!--<nz-carousel [nzEffect]="'fade'" [nzAutoPlay]="true" [nzAutoPlaySpeed]="10000" [nzEnableSwipe]="true">
+  <div nz-carousel-content *ngFor="let slide of imageArray">
+    <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
+      <a [routerLink]="slide.shot"> <button nbButton type="button" class="home-button">  Click Me! </button></a>
+    </div>
+    <img [src]='slide.url'  alt="">
+  </div>
+</nz-carousel>
+  -->

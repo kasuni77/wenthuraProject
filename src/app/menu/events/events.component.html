@@ -1,0 +1,48 @@
+<div class="col-lg-12">
+  <div class="infinite-cards">
+    <nb-card class="own-scroll" accent="success"  [nbSpinner]="loading"
+             nbSpinnerStatus="success"
+             nbSpinnerSize="large"
+             nbSpinnerMessage="Loading!">
+
+      <nb-card-header><h6><label class="search-label" for="search">Search : </label>
+        <input nbInput nbFilterInput="dataSource" id="search" class="search-input">
+        <a [routerLink]="['/menu/event-form']"><button  class="btn" status="success" size="small" nbButton ><i class="fa fa-plus"></i>Create</button></a>
+      </h6></nb-card-header>
+
+
+      <nb-list
+
+      >
+        <nb-list-item  *ngFor="let event of cards" >
+          <nb-accordion>
+            <nb-accordion-item #item>
+              <nb-accordion-item-header>
+                <nb-user [name]="event.eName" shape="rectangle"[title]="event.eDate">
+                </nb-user>
+                <label *ngIf="event.eStatus == 'Published'" style="color: blue; opacity: 0.6;">{{event.eStatus}}</label>
+                <label *ngIf="event.eStatus == 'Draft'" style="color:moccasin;opacity: 0.6;">{{event.eStatus}}</label>
+                <label *ngIf="event.eStatus == 'Completed'" style="color:green;opacity: 0.6;">{{event.eStatus}}</label>
+                <label *ngIf="event.eStatus == 'Canceled'" style="color:red;opacity: 0.6;">{{event.eStatus}}</label>
+                <label *ngIf="event.eStatus == 'In Progress'" style="color:aqua;opacity: 0.6;">{{event.eStatus}}</label>
+                <div class="mag">
+                  <nb-action size="tiny">
+                    <nb-action *ngIf="event.eStatus == 'Draft'" class="edit" (click)="Publish(event.id,event)" icon="arrow-circle-up-outline"></nb-action>
+                    <nb-action *ngIf="event.sStatus == 'Completed'" class="edit"  icon="heart-outline"></nb-action>
+                    <nb-action  class="edit" (click)="onUpdate(event.id)"  icon="edit-2-outline"></nb-action>
+                    <nb-action  class="edit" (click)="onDelete(event.id)" icon="trash-2-outline"></nb-action>
+                  </nb-action>
+                </div>
+              </nb-accordion-item-header>
+              <nb-accordion-item-body>
+               Description : {{event.eDesc}} <br>
+               Other    : {{event.eAny}}
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+          </nb-accordion>
+        </nb-list-item>
+
+      </nb-list>
+    </nb-card>
+  </div>
+</div>
